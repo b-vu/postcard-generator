@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_16_200018) do
+ActiveRecord::Schema.define(version: 2022_04_17_174618) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,48 @@ ActiveRecord::Schema.define(version: 2022_04_16_200018) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "institutions", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "manager_name"
+    t.string "username"
+    t.string "password_digest"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "postcards", force: :cascade do |t|
+    t.string "message"
+    t.bigint "user_id", null: false
+    t.bigint "recipient_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["recipient_id"], name: "index_postcards_on_recipient_id"
+    t.index ["user_id"], name: "index_postcards_on_user_id"
+  end
+
+  create_table "recipients", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.bigint "institution_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["institution_id"], name: "index_recipients_on_institution_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "username"
+    t.string "password_digest"
+    t.string "email"
+    t.string "first_name"
+    t.string "last_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "postcards", "recipients"
+  add_foreign_key "postcards", "users"
+  add_foreign_key "recipients", "institutions"
 end
