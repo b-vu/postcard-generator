@@ -6,9 +6,26 @@ import Login from "./pages/Login";
 import NewPostcard from "./pages/NewPostcard";
 import NewRecipient from "./pages/NewRecipient";
 import NoPage from "./pages/NoPage"
+import { useEffect, useState } from 'react';
 
 
 function App() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    fetch("/me")
+    .then(res => {
+      if(res.ok) {
+        res.json()
+        .then(user => setUser(user))
+      }
+    })
+  }, []);
+
+  if(!user) {
+    return <Login></Login>
+  }
+
   return (
     <BrowserRouter>
       <Routes>
