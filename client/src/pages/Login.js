@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
+import { useNavigate } from "react-router-dom";
 
-function Login() {
+function Login({ setUser }) {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -11,6 +12,8 @@ function Login() {
   });
   const [isSigningUp, setIsSigningUp] = useState(false);
 
+  let navigate = useNavigate();
+
   function handleFormChange(e) {
     setFormData({
       ...formData,
@@ -18,20 +21,36 @@ function Login() {
     });
   }
 
+  function onLogin(user) {
+    setUser(user)
+    navigate("/")
+  }
+
   function handleFormSubmit(e) {
     e.preventDefault();
-
-    console.log(formData)
-    fetch("/signup", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(formData)
-    })
-    .then(res => res.json())
-    .then(data => console.log(data));
-  }
+    if (isSigningUp) {
+      fetch("/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+      })
+      .then(res => res.json())
+      .then(user => onLogin(user));
+      } 
+    else {
+      fetch("/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
+      .then((r) => r.json())
+      .then(user => onLogin(user));
+      }
+    }
 
   function handleSignUpStateChange() {
     setIsSigningUp(!isSigningUp);
