@@ -14,3 +14,6 @@ class PostcardSerializer < ActiveModel::Serializer
     rails_blob_path(image, only_path: true)
   end
 end
+
+# Method to generate a smaller variant of the image blob and upload it to S3 bucket
+# object.image.variant(resize_to_limit: [300, 300]).processed.url

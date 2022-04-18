@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-    has_many :postcards
+    has_many :postcards, dependent: :destroy
     has_many :recipients, through: :postcards
     has_secure_password
 

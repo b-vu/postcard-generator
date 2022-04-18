@@ -30,7 +30,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Layout user={user} setUser={setUser} />}>
-        <Route index element={<Home />} />
+        <Route index element={<Home user={user}/>} />
         <Route path="select" element={<Select />} />
         <Route path="login" element={<Login setUser={setUser}/>} />
         <Route path="new_postcard" element={<NewPostcard />} />
