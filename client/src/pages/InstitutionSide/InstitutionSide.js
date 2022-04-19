@@ -27,7 +27,7 @@ function InstitutionSide() {
         <Route index element={<InstitutionHome />} />
         <Route path="login" element={<InstLogin setUser={setUser}/>} />
         <Route path="new_recipient" element={<NewRecipient />} />
-        {/* <Route path="*" element={<NoPage />} /> */}
+        <Route path="*" element={<InstitutionHome />} />
       </Route>
     </Routes>
   )
