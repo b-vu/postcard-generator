@@ -53,5 +53,3 @@ gem "active_model_serializers", "~> 0.10.12"
 gem 'email_validator'
 
 gem "aws-sdk-s3", require: false
-
-gem 'image_processing', '~> 1.2'
