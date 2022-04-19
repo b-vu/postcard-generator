@@ -5,7 +5,7 @@ function NewPostcard() {
   const [selectedFile, setSelectedFile] = useState("");
   const [canvas, setCanvas] = useState("");
   const [imgURL, setImgURL] = useState("");
-  
+  const [backgroundcolor, setBackgroundColor] = useState(null);
 
   useEffect(() => {
     setCanvas(initCanvas());
@@ -24,6 +24,9 @@ function NewPostcard() {
     const colorInput = document.querySelector("#clr");
     const color = colorInput.value;
     myCanvas.style.backgroundColor = color;
+
+    //setting background color to state so we can access it in the download function
+    setBackgroundColor(color)
   }
 
   const addRect = canvi => {
@@ -66,10 +69,31 @@ function NewPostcard() {
     canvi.renderAll();
   }
 
+  function createDummyCanvas() {
+    // creating a dummy canvas and copying the original canvas content onto it
+    const sourceCanvas = document.querySelector("#canvas");
+
+    const destinationCanvas = document.createElement("canvas");
+    destinationCanvas.width = sourceCanvas.width;
+    destinationCanvas.height = sourceCanvas.height;
+    const destCtx = destinationCanvas.getContext('2d');
+
+    //create a rectangle with the desired color
+    destCtx.fillStyle = backgroundcolor;
+    destCtx.fillRect(0, 0, sourceCanvas.width, sourceCanvas.height);
+
+    //draw the original canvas onto the destination canvas
+    destCtx.drawImage(sourceCanvas, 0, 0);
+
+    //converts the canvas to base-64 data that represents a file type(defaults to PNG)
+    const postcardImg = destinationCanvas.toDataURL();
+
+    return postcardImg;
+  }
+
   function handleDownloadClick(){
-    const postcardImg = canvas.toDataURL({
-      format: 'png'
-    })
+    const postcardImg = createDummyCanvas();
+
     const link = document.createElement('a');
     link.download = "my-postcard.png";
     link.href = postcardImg;
@@ -100,15 +124,14 @@ function NewPostcard() {
     .then(data => console.log(data));
   }
 
-  function submitImage(e) {
-    //converts the canvas to base-64 data that represents a file type(defaults to PNG)
-    const data = e.target.parentNode.children[0].toDataURL()
+  function submitImage() {
+    const data = createDummyCanvas();
 
     //creating the FormData object to be easily sent in an HTTP request
     let formData = new FormData();
 
     //appending the image key with the file data in the FormData object
-    formData.append("image", data)
+    formData.append("image", data);
 
     fetch("/postcards", {
       method: "POST",
@@ -126,7 +149,7 @@ function NewPostcard() {
         <button>Submit</button>
       </form>
 
-      {/* <img src='/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBCZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--067ea5ad84b1c04d315a5a444e92863574e47c83/pexels-helena-lopes-2253275.jpg' alt="Dog"></img> */}
+      {/* <img src="" alt="Postcard"></img> */}
 
       <div className='canvas-box'>
         <button onClick={() => addRect(canvas)}>Rectangle</button>
