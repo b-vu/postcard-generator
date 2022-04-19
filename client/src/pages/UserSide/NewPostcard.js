@@ -146,7 +146,7 @@ function NewPostcard() {
       NewPostcard
       <form onSubmit={handleFormSubmit}>
         <input type="file" onChange={handleSelectedFileChange}></input>
-        <button>Submit</button>
+        <button>Upload</button>
       </form>
 
       {/* <img src="" alt="Postcard"></img> */}
