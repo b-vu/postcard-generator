@@ -1,9 +1,9 @@
 import './App.css';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Layout from "./pages/Layout"
 import Home from "./pages/Home"
 import Select from "./pages/auth/Select";
-import Login from "./pages/Login";
+import Login from "./pages/auth/Login";
 import NewPostcard from "./pages/NewPostcard";
 import NewRecipient from "./pages/NewRecipient";
 import NoPage from "./pages/NoPage"
