@@ -16,7 +16,7 @@ function Layout({ user, setUser }) {
   }
 
   function handleLogin() {
-    navigate("/login")
+    navigate("/select")
   }
 
   let button
