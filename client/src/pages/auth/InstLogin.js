@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom";
 
-function OrgLogin({ setUser }) {
+function InstLogin({ setUser }) {
     const [formData, setFormData] = useState({
         username: "",
         password: "",
         password_confirmation: "",
         email: "",
-        name: "",
+        institution_name: "",
         manager_name: ""
     });
     const [isSigningUp, setIsSigningUp] = useState(false);
@@ -23,13 +23,13 @@ function OrgLogin({ setUser }) {
 
     function onLogin(user) {
     setUser(user)
-    navigate("/")
+    navigate("/org")
     }
 
     function handleFormSubmit(e) {
         e.preventDefault();
         if (isSigningUp) {
-            fetch("/signup", {
+            fetch("/inst-signup", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -67,8 +67,8 @@ function OrgLogin({ setUser }) {
                 <input type="password" name="password" value={formData.password} onChange={handleFormChange} placeholder="Password"></input>
                 <input type="password" name="password_confirmation" value={formData.password_confirmation} onChange={handleFormChange} placeholder="Password Confirmation"></input>
                 <input type="text" name="email" value={formData.email} onChange={handleFormChange} placeholder="Email"></input>
-                <input type="text" name="institution_name" value={formData.name} onChange={handleFormChange} placeholder="Institution Name"></input>
-                <input type="text" name="name" value={formData.name} onChange={handleFormChange} placeholder="Manager's First Name"></input>
+                <input type="text" name="name" value={formData.name} onChange={handleFormChange} placeholder="Institution Name"></input>
+                <input type="text" name="manager_name" value={formData.manager_name} onChange={handleFormChange} placeholder="Manager's First Name"></input>
                 <button>Submit</button>
 
                 Already have an account? <button onClick={handleSignUpStateChange}>Login</button>
@@ -88,4 +88,4 @@ function OrgLogin({ setUser }) {
 }
 
 
-export default OrgLogin
+export default InstLogin
