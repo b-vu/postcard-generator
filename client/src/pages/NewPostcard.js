@@ -14,12 +14,26 @@ function NewPostcard() {
 
     formData.append("image", selectedFile);
 
+    // POST request for uploaded images
     fetch("/postcards", {
       method: "POST",
       body: formData
     })
     .then(res => res.json())
     .then(data => console.log(data));
+
+    // Testing POST request for image URL's
+    // fetch("/postcards", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json"
+    //   },
+    //   body: JSON.stringify({
+    //     image_url: imageUrl
+    //   })
+    // })
+    // .then(res => res.json())
+    // .then(data => console.log(data));
   }
 
   return (
