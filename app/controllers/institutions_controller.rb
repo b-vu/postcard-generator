@@ -16,7 +16,7 @@ class InstitutionsController < ApplicationController
     end
 
     def show
-    institution = Institution.find_by(id: session[:user_id])
+    institution = Institution.find_by(id: session[:institution_id])
         if institution
             render json: institution, status: :ok
         else

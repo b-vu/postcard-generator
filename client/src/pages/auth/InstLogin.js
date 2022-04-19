@@ -40,7 +40,7 @@ function InstLogin({ setUser }) {
             .then(user => onLogin(user));
         } 
         else {
-            fetch("/login", {
+            fetch("/inst-login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
