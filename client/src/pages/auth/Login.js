@@ -38,7 +38,7 @@ function Login({ setUser }) {
       })
       .then(res => res.json())
       .then(user => onLogin(user));
-      } 
+    } 
     else {
       fetch("/login", {
         method: "POST",
