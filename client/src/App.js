@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Layout from "./pages/Layout"
 import Home from "./pages/Home"
 import Select from "./pages/auth/Select";
@@ -30,7 +30,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Layout user={user} setUser={setUser} />}>
-        <Route index element={<Home />} />
+        <Route index element={<Home user={user}/>} />
         <Route path="select" element={<Select />} />
         <Route path="login" element={<Login setUser={setUser}/>} />
         <Route path="new_postcard" element={<NewPostcard />} />
