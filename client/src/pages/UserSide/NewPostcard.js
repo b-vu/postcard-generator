@@ -118,14 +118,6 @@ function NewPostcard() {
     .then(data => console.log(data));
   }
 
-  //function for adding text to the canvas
-  function addText(e) {
-    const canvas = e.target.parentNode.children[0];
-    const canvasContext = canvas.getContext("2d");
-    canvasContext.font = "30px Arial";
-    canvasContext.fillText("Hello World",10,50);
-  }
-
   return (
     <div>
       NewPostcard
