@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
-  namespace :api do
-    resources :s3, only: [:index]
-  end
-  
-  resources :postcards, only: [:index, :create]
+  resources :postcards, only: [:index, :show, :create]
   resources :institutions, only: [:index]
 
   #standard user signup/login/logout

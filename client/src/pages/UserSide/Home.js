@@ -1,8 +1,20 @@
 import React from 'react'
 
-function Home() {
+function Home({ user }) {
+  console.log(user)
+
   return (
-    <div>Welcome to the Jungle</div>
+    <div>
+      Home
+      {
+        user ? 
+        user.postcards.map(postcard => {
+          return <img src={postcard.image.url} alt="Postcard"></img>
+        })
+        :
+        null
+      }
+    </div>
   )
 }
 
