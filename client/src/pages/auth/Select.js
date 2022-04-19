@@ -5,7 +5,7 @@ function Select() {
     let navigate = useNavigate()
 
     function handleRedirect(e) {
-        e.target.value === "user" ? navigate("/login") : console.log("not yet")
+        e.target.value === "user" ? navigate("/login") : navigate("/org/login")
     }
 
   return (
