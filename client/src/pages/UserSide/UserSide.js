@@ -1,10 +1,11 @@
 import React from 'react'
 import { Routes, Route } from "react-router-dom";
+import Layout from "../Layout"
 import Home from "./Home";
 import Login from "../auth/Login";
 import Select from "../auth/Select";
 import NewPostcard from "./NewPostcard";
-import NoPage from "./NoPage";
+// import NoPage from "./NoPage";
 import { useEffect, useState } from 'react';
 
 function UserSide() {
@@ -23,7 +24,7 @@ function UserSide() {
 
     return (
         <Routes>
-            <Route path="/">
+            <Route path="/" element={<Layout user={user} setUser={setUser} />}>
                 <Route index element={<Home />} />
                 <Route path="select" element={<Select />} />
                 <Route path="login" element={<Login setUser={setUser}/>} />

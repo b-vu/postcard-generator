@@ -5,9 +5,16 @@ function Layout({ user, setUser }) {
   let navigate = useNavigate()
 
   function handleLogout () {
-    fetch("/logout", {
-      method: "DELETE",
-    }).then(() => onLogout());
+    if (user.manager_name) {
+      fetch("/inst-logout", {
+        method: "DELETE",
+      }).then(() => onLogout());
+    } 
+    else {
+      fetch("/logout", {
+        method: "DELETE",
+      }).then(() => onLogout());
+    }
   }
 
   function onLogout() {
