@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   post '/signup', to: 'users#create'
   get '/me', to: 'users#show'
   post '/login', to: 'sessions#create'
+  post '/inst-login', to: 'sessions#inst_create'
+  delete '/inst-logout', to: 'sessions#inst_destroy'
   delete '/logout', to: 'sessions#destroy'
   get '/inst', to: 'institutions#show'
   post '/inst-signup', to: 'institutions#create'
