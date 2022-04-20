@@ -3,8 +3,8 @@ import { Routes, Route } from "react-router-dom";
 import Layout from "../Layout"
 import InstitutionHome from './InstitutionHome';
 import InstLogin from '../auth/InstLogin';
-import NewRecipient from './NewRecipient';
-// import NoPage from './NoPage';
+import Recipients from './Recipients'
+import Postcards from './Postcards'
 import { useEffect, useState } from 'react';
 
 
@@ -26,8 +26,10 @@ function InstitutionSide() {
       <Route path="/org" element={<Layout user={user} setUser={setUser} />}>
         <Route index element={<InstitutionHome />} />
         <Route path="login" element={<InstLogin setUser={setUser}/>} />
-        <Route path="new_recipient" element={<NewRecipient />} />
-        {/* <Route path="*" element={<InstitutionHome />} /> */}
+        <Route path="recipients">
+          <Route index element={<Recipients user={user} />} />
+          <Route path="postcards" element={<Postcards />} />
+        </Route>
       </Route>
     </Routes>
   )

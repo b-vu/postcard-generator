@@ -28,6 +28,17 @@ function Navbar( {user, setUser} ) {
         navigate("/select")
     }
 
+    let homeLink
+    if (user) {
+        if (user.manager_name) {
+            homeLink = <Link to="/org">Home</Link>
+        } else {
+            homeLink = <Link to="/">Home</Link>
+        } 
+    } else {
+        homeLink = <Link to="/">Home</Link>
+    }
+
     let button
     if (user){
         button = <button onClick={handleLogout}>Logout</button>
@@ -39,7 +50,7 @@ function Navbar( {user, setUser} ) {
     let newCreation;
     if (user){
         if(user.manager_name){
-            newCreation = <Link to="/new_recipient">New Recipient</Link>
+            newCreation = <Link to="/org/recipients">Recipients</Link>
         } else {
             newCreation = <Link to="/new_postcard">New Postcard</Link>
         }
@@ -50,7 +61,7 @@ function Navbar( {user, setUser} ) {
 
     return (
     <nav>
-        <Link to="/">Home</Link>
+        {homeLink}
         {newCreation}
         {button}
     </nav>
