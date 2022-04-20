@@ -2,13 +2,6 @@ import React from 'react'
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom"
 
-
-// Make dynamic login button
-// let loginLink;
-// if (user) {
-//     loginLink = <Link to=""
-// }
-
 function Navbar( {user, setUser} ) {
 
     let navigate = useNavigate()
@@ -42,24 +35,8 @@ function Navbar( {user, setUser} ) {
         button = <button onClick={handleLogin}>Login</button>
     }
 
-    // Make dynamic login button
-    // let loginLink;
-    // if (user) {
-    //     loginLink = <Link to=""
-    // }
-
-    
-    // Conditional rendering of the new postcard/recipient 
-    
+    // Conditional rendering of the new postcard/recipient     
     let newCreation;
-    // if (user.manager_name) {
-    //     newCreation = <Link to="/new_recipient">New Recipient</Link>
-    // } else if (user) {
-    //     newCreation = <Link to="/new_postcard">New Postcard</Link>
-    // } else {
-    //     newCreation = <Link to="/login">New Postcard</Link>
-    // }
-
     if (user){
         if(user.manager_name){
             newCreation = <Link to="/new_recipient">New Recipient</Link>
