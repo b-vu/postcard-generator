@@ -15,12 +15,16 @@ function Recipients( { user } ) {
         setRecipients([...recipients, recipient])
     }
 
+    function handleRecipientsEdit(array){
+        setRecipients(array)
+    }
+
 
 
     return (
         <div>
             <RecipientForm handleAddRecipient={handleAddRecipient} user={user} />
-            <RecipientList user={user} recipients={recipients} />
+            <RecipientList user={user} recipients={recipients} handleRecipientsEdit={handleRecipientsEdit} />
         </div>
     )
 }

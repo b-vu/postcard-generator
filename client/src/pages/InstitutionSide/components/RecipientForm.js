@@ -19,7 +19,10 @@ function RecipientForm( { user, handleAddRecipient } ) {
           })
           .then(res => res.json())
           .then(recipient => handleAddRecipient(recipient));
-        
+        setFormData({
+          first_name: "", 
+          last_name: ""
+      })
     }
 
     function handleFormChange (e) {
