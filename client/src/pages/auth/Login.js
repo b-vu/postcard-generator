@@ -57,32 +57,58 @@ function Login({ setUser }) {
   }
 
   return (
-    <div>
-      {
-        isSigningUp ?
-        <form onSubmit={handleFormSubmit}>
-          Sign Up
-          <input type="text" name="username" value={formData.username} onChange={handleFormChange} placeholder="Username"></input>
-          <input type="password" name="password" value={formData.password} onChange={handleFormChange} placeholder="Password"></input>
-          <input type="password" name="password_confirmation" value={formData.password_confirmation} onChange={handleFormChange} placeholder="Password Confirmation"></input>
-          <input type="text" name="email" value={formData.email} onChange={handleFormChange} placeholder="Email"></input>
-          <input type="text" name="first_name" value={formData.first_name} onChange={handleFormChange} placeholder="First Name"></input>
-          <input type="text" name="last_name" value={formData.last_name} onChange={handleFormChange} placeholder="Last Name"></input>
-          <button>Submit</button>
+    <>
+      <div className='h-screen flex'>
+        <div className='w-full max-w-md m-auto bg-white rounded-lg border border-primaryBorder shadow-default py-10 px-16'>
+          {
+            isSigningUp ?
+            <form onSubmit={handleFormSubmit}>
+              <h1 className='font-serif text-4xl font-bold text-primary mt-4 mb-12 text-center'>
+                SIGN UP
+              </h1>
+              <input className={`font-serif w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`} type="text" name="username" value={formData.username} onChange={handleFormChange} placeholder="Username"></input>
+              <input className={`font-serif w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`} type="password" name="password" value={formData.password} onChange={handleFormChange} placeholder="Password"></input>
+              <input className={`font-serif w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`} type="password" name="password_confirmation" value={formData.password_confirmation} onChange={handleFormChange} placeholder="Password Confirmation"></input>
+              <input className={`font-serif w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`} type="text" name="email" value={formData.email} onChange={handleFormChange} placeholder="Email"></input>
+              <input className={`font-serif w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`} type="text" name="first_name" value={formData.first_name} onChange={handleFormChange} placeholder="First Name"></input>
+              <input className={`font-serif w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`} type="text" name="last_name" value={formData.last_name} onChange={handleFormChange} placeholder="Last Name"></input>
+              
+              <div className='flex justify-center items-center mt-6'>
+                <button className={`font-serif text-center py-2 px-4 bg-stone-200 rounded-full text-base hover:bg-stone-400 transition duration-300 ease-in-out flex items-center animate-bounce"`}>Submit</button>
+                </div>
 
-          Already have an account? <button onClick={handleSignUpStateChange}>Login</button>
-        </form>
-        :
-        <form onSubmit={handleFormSubmit}>
-          Login
-          <input type="text" name="username" value={formData.username} onChange={handleFormChange} placeholder="Username"></input>
-          <input type="password" name="password" value={formData.password} onChange={handleFormChange} placeholder="Password"></input>
-          <button>Submit</button>
+              <div className='flex justify-center items-center mt-6'>
+                <button className={`font-serif text-center py-2 px-4 bg-stone-200 rounded-full text-base hover:bg-stone-400 transition duration-300 ease-in-out flex items-center animate-bounce"`} onClick={handleSignUpStateChange}>Already have an account? Login</button>
+              </div>
 
-          Don't have an account? <button onClick={handleSignUpStateChange}>Sign up</button>
-        </form>
-      }
-    </div>
+            </form>
+            :
+            <form onSubmit={handleFormSubmit}>
+              <h1 className='font-serif text-4xl font-bold text-primary mt-4 mb-12 text-center'>
+                LOGIN
+              </h1>
+              <input className={`font-serif w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`} type="text" name="username" value={formData.username} onChange={handleFormChange} placeholder="Username"></input>
+              <input className={`font-serif w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`} type="password" name="password" value={formData.password} onChange={handleFormChange} placeholder="Password"></input>
+              
+              <div className='flex justify-center items-center mt-6'>
+                <button className={`font-serif text-center py-2 px-4 bg-stone-200 rounded-full text-base hover:bg-stone-400 transition duration-300 ease-in-out flex items-center animate-bounce"`}>Submit</button>
+              </div>
+              
+              <div className='flex justify-center items-center mt-6'>
+              <button className={`font-serif text-center py-2 px-4 bg-stone-200 rounded-full text-base hover:bg-stone-400 transition duration-300 ease-in-out flex items-center animate-bounce"`} onClick={handleSignUpStateChange}>Don't have an account? Sign up</button>
+              </div>
+
+            </form>
+          }
+        </div>
+      </div>
+    </>
+
+    
+
+
+
+
   )
 }
 
