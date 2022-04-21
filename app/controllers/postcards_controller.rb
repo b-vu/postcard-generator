@@ -18,13 +18,12 @@ class PostcardsController < ApplicationController
             # Decoding the base-64 code that we got from converting the canvas element to an image file
             decoded_data = Base64.decode64(params[:image].split(',')[1])
             image = { 
-                io: StringIO.new(decoded_data), # I don't know what this does yet
+                io: StringIO.new(decoded_data),
                 content_type: 'image/png',
                 filename: 'image.png'
             }
         end
 
-        # Testing with hard coded params
         postcard = Postcard.create!({
             message: "Test",
             image: image,
