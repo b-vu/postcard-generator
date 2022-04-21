@@ -9,7 +9,7 @@ class Postcard < ApplicationRecord
   def acceptable_image
     return unless image.attached?
   
-    unless image.byte_size <= 1.megabyte
+    unless image.byte_size <= 2.megabyte
       errors.add(:image, "file is too large")
     end
   

@@ -28,7 +28,7 @@ function UserSide() {
                 <Route index element={<Home user={user}/>} />
                 <Route path="select" element={<Select />} />
                 <Route path="login" element={<Login setUser={setUser}/>} />
-                <Route path="new_postcard" element={<NewPostcard />} />
+                <Route path="new_postcard" element={<NewPostcard user={user} />} />
                 {/* <Route path="*" element={<Home />} /> */}
             </Route>
         </Routes>

@@ -2,20 +2,29 @@ import React, { useState, useEffect } from 'react'
 import { fabric } from 'fabric'
 // import FontFaceObserver from "fontfaceobserver";
 
-function NewPostcard() {
+function NewPostcard({ user }) {
   const [selectedFile, setSelectedFile] = useState("");
   const [canvas, setCanvas] = useState("");
   const [imgURL, setImgURL] = useState("");
   const [backgroundcolor, setBackgroundColor] = useState(null);
+  const [institutions, setInstitutions] = useState([]);
+  const [selectedInstitution, setSelectedInstitution] = useState("");
+  const [selectedRecipient, setSelectedRecipient] = useState("");
 
   useEffect(() => {
     setCanvas(initCanvas());
   }, []);
 
+  useEffect(() => {
+    fetch("/institutions")
+    .then(res => res.json())
+    .then(data => setInstitutions(data));
+  }, []);
+
   const initCanvas = () => (
     new fabric.Canvas('canvas', {
-      height: 800,
-      width: 800,
+      height: 700,
+      width: 1000,
     })
   )
 
@@ -114,13 +123,46 @@ function NewPostcard() {
     return postcardImg;
   }
 
+  //Setting a canvas background with an image uploaded by the user
+  function createImageBackgoundCanvas(e) {
+    e.preventDefault();
+
+    const file = selectedFile;
+    const reader = new FileReader();
+    reader.onload = function(f) {
+      const data = f.target.result;
+      fabric.Image.fromURL(data, function(img) {
+        canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas), {
+          scaleX: canvas.width / img.width,
+          scaleY: canvas.height / img.height
+        });
+      });
+    };
+    reader.readAsDataURL(file);
+  }
+
+  // POST request for uploaded images
+  function sendPostRequest(data, method) {
+    let formData = new FormData();
+    formData.append("image", data);
+    formData.append("method", method);
+    formData.append("user_id", user.id);
+    formData.append("recipient_id", selectedRecipient)
+    
+    fetch("/postcards", {
+      method: "POST",
+      body: formData
+    })
+    .then(res => res.json())
+    .then(data => console.log(data));
+  }
+
   function handleDownloadClick(){
     const postcardImg = createDummyCanvas();
     const link = document.createElement('a');
     link.download = "my-postcard.png";
     link.href = postcardImg;
     link.click();
-    console.log('Download button clicked')
   }
 
 
@@ -128,45 +170,44 @@ function NewPostcard() {
     setSelectedFile(e.target.files[0])
   }
 
-  function handleFormSubmit(e) {
-    e.preventDefault();
-    //creating the FormData object to be easily sent in an HTTP request
-    let formData = new FormData();
-    //appending the image key with the uploaded image in the FormData object
-    formData.append("image", selectedFile);
-
-    // POST request for uploaded images
-    fetch("/postcards", {
-      method: "POST",
-      body: formData
-    })
-    .then(res => res.json())
-    .then(data => console.log(data));
-  }
-
   function submitImage() {
     const data = createDummyCanvas();
-    //creating the FormData object to be easily sent in an HTTP request
-    let formData = new FormData();
-    //appending the image key with the file data in the FormData object
-    formData.append("image", data);
+    sendPostRequest(data, "submit");
+  }
 
-    fetch("/postcards", {
-      method: "POST",
-      body: formData
-    })
-    .then(res => res.json())
-    .then(data => console.log(data));
+  function handleInstitutionChange(e) {
+    setSelectedInstitution(e.target.value);
+  }
+
+  function handleRecipientChange(e) {
+    setSelectedRecipient(e.target.value);
   }
 
   return (
     <>
-
-    
-      <form onSubmit={handleFormSubmit}>
+      <form onSubmit={createImageBackgoundCanvas}>
         <input type="file" onChange={handleSelectedFileChange}></input>
         <button>Upload</button>
       </form>
+
+      <select placeholder="Select an Institution" name="institutionId" value={selectedInstitution} onChange={handleInstitutionChange}>
+          <option value="" disabled>Select an Institution</option>
+          {
+            institutions.map(institution => <option key={institution.id} value={institution.id}>{institution.name}</option>)
+          }
+        </select>
+
+        {/* Conditional rendering of recipients based on selected instiution */}
+        {
+          selectedInstitution !== "" ?
+          <select placeholder="Select a Recipient" name="recipientId" value={selectedRecipient} onChange={handleRecipientChange}>
+            <option value="" disabled>Select a Recipient</option>
+            {
+              institutions.filter(i => i.id === parseInt(selectedInstitution))[0].recipients.map(r => <option key={r.id} value={r.id}>{r.first_name} {r.last_name}</option>)
+            }
+          </select>
+          : null
+        }
 
       <div className="w-95 h-full shadow-md bg-white px-1 absolute" id="sidenavExample">
         <ul className="relative">
