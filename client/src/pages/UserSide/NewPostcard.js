@@ -2,14 +2,23 @@ import React, { useState, useEffect } from 'react'
 import { fabric } from 'fabric'
 // import FontFaceObserver from "fontfaceobserver";
 
-function NewPostcard() {
+function NewPostcard({ user }) {
   const [selectedFile, setSelectedFile] = useState("");
   const [canvas, setCanvas] = useState("");
   const [imgURL, setImgURL] = useState("");
   const [backgroundcolor, setBackgroundColor] = useState(null);
+  const [institutions, setInstitutions] = useState([]);
+  const [selectedInstitution, setSelectedInstitution] = useState("");
+  const [recipients, setRecipients] = useState([]);
 
   useEffect(() => {
     setCanvas(initCanvas());
+  }, []);
+
+  useEffect(() => {
+    fetch("/institutions")
+    .then(res => res.json())
+    .then(data => setInstitutions(data));
   }, []);
 
   const initCanvas = () => (
@@ -128,6 +137,21 @@ function NewPostcard() {
     return postcardImg;
   }
 
+  // POST request for uploaded images
+  function sendPostRequest(data, method) {
+    let formData = new FormData();
+    formData.append("image", data);
+    formData.append("method", method);
+    formData.append("user_id", user.id);
+    
+    fetch("/postcards", {
+      method: "POST",
+      body: formData
+    })
+    .then(res => res.json())
+    .then(data => console.log(data));
+  }
+
   function handleDownloadClick(){
     const postcardImg = createDummyCanvas();
     const link = document.createElement('a');
@@ -142,35 +166,18 @@ function NewPostcard() {
     setSelectedFile(e.target.files[0])
   }
 
-  function handleFormSubmit(e) {
+  function handleFormUpload(e) {
     e.preventDefault();
-    //creating the FormData object to be easily sent in an HTTP request
-    let formData = new FormData();
-    //appending the image key with the uploaded image in the FormData object
-    formData.append("image", selectedFile);
-
-    // POST request for uploaded images
-    fetch("/postcards", {
-      method: "POST",
-      body: formData
-    })
-    .then(res => res.json())
-    .then(data => console.log(data));
+    sendPostRequest(selectedFile, "upload");
   }
 
   function submitImage() {
     const data = createDummyCanvas();
-    //creating the FormData object to be easily sent in an HTTP request
-    let formData = new FormData();
-    //appending the image key with the file data in the FormData object
-    formData.append("image", data);
+    sendPostRequest(data, "submit");
+  }
 
-    fetch("/postcards", {
-      method: "POST",
-      body: formData
-    })
-    .then(res => res.json())
-    .then(data => console.log(data));
+  function handleInstitutionChange(e) {
+    setSelectedInstitution(e.target.value);
   }
 
   return (
@@ -178,7 +185,7 @@ function NewPostcard() {
 
       <h3>Create your Postcard</h3>
 
-      <form onSubmit={handleFormSubmit}>
+      <form onSubmit={handleFormUpload}>
         <input type="file" onChange={handleSelectedFileChange}></input>
         <button>Upload</button>
       </form>
@@ -207,6 +214,20 @@ function NewPostcard() {
         </form>
         
         <button onClick={handleDownloadClick}>Download Postcard</button>
+
+        <select placeholder="Select an Institution" name="institutionId" value={selectedInstitution} onChange={handleInstitutionChange}>
+          <option value="" disabled>Select an Institution</option>
+          {
+            institutions.map(institution => <option key={institution.id} value={institution.id}>{institution.name}</option>)
+          }
+        </select>
+
+        {/* Conditional rendering of recipients based on selected instiution */}
+        {
+          selectedInstitution !== "" ?
+          institutions.filter(i => i.id === parseInt(selectedInstitution))[0].recipients.map(r => <p key={r.id}>{r.first_name} {r.last_name}</p>)
+          : null
+        }
 
         <div id="text-controls">
         <input type="color" value="" id="text-color" size="10" onChange={changeTextClr} />

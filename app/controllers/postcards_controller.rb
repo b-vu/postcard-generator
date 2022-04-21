@@ -12,20 +12,23 @@ class PostcardsController < ApplicationController
     end
 
     def create
-        # Decoding the base-64 code that we got from converting the canvas element to an image file
-        # Will need to eventually add a conditional here or create a new action for creating a Postcard based on image upload or submitting a canvas
-        # decoded_data = Base64.decode64(params[:image].split(',')[1])
+        if params[:method] == "upload"
+            image = params[:image]
+        else
+            # Decoding the base-64 code that we got from converting the canvas element to an image file
+            decoded_data = Base64.decode64(params[:image].split(',')[1])
+            image = { 
+                io: StringIO.new(decoded_data), # I don't know what this does yet
+                content_type: 'image/png',
+                filename: 'image.png'
+            }
+        end
 
         # Testing with hard coded params
         postcard = Postcard.create!({
             message: "Test",
-            image: params[:image],
-            # image: { 
-            #     io: StringIO.new(decoded_data), # I don't know what this does yet
-            #     content_type: 'image/png',
-            #     filename: 'image.png'
-            # },
-            user_id: 1,
+            image: image,
+            user_id: params[:user_id],
             recipient_id: 1
         })
         render json: postcard, status: :created
