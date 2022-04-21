@@ -4,6 +4,15 @@ class RecipientsController < ApplicationController
         render json: recipients, status: :ok
     end
 
+    def show
+        recipient = Recipient.find(params[:id])
+        if recipient
+            render json: recipient, status: :ok
+        else
+            render json: { error: "Recipient not found" }, status: :not_found
+        end
+    end
+
     def create
         recipient = Recipient.create!(recipient_params)
         if recipient.valid?
@@ -18,6 +27,25 @@ class RecipientsController < ApplicationController
         render json: recipients
     end
 
+    def update
+        recipient = Recipient.find(params[:id])
+        if recipient
+            recipient.update(recipient_params)
+            render json: recipient, status: :ok
+        else
+            render json: { error: "Recipient not found" }, status: :not_found
+        end
+    end
+
+    def destroy
+        recipient = Recipient.find(params[:id])
+        if recipient
+            recipient.destroy
+            render json: {}, status: :ok
+        else
+            render json: { error: "Recipient not found" }, status: :not_found
+        end
+    end
 
     private
 
