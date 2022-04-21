@@ -14,23 +14,23 @@ function Home({ user }) {
       </header>
 
       <div className="font-serif leading-normal mx-auto py-12 px-4 max-w-lg">
-        <p className="mb-6 text-xl md:text-4xl uppercase font-bold">WHO WE ARE.</p>
-        <p className="mb-4 text-lg">Quae commodi reiciendis dignissimos. Rerum molestiae hic dolores assumenda dolor! Corrupti reiciendis maxime fuga, recusandae obcaecati officia cum temporibus dicta quibusdam praesentium, magni, cumque aperiam iusto sequi illum molestiae non.</p>
-        <p className="mb-4 text-lg">In excepturi repellendus eum, qui corrupti rerum perferendis harum adipisci voluptate? Nihil, quidem deleniti libero officia dicta vel asperiores velit molestiae blanditiis, dolore voluptatibus excepturi laudantium at veniam illo. Dolor!</p>
+        <p className="mb-6 text-xl md:text-4xl uppercase font-bold">WHO WE ARE</p>
+        <p className="mb-4 text-lg">Postcard Generator is a free service dedicated to providing individuals in hospitals or assisted-living facilities with uplifting cards from caring individuals across the globe. </p>
+        <p className="mb-4 text-lg">In difficult times, a small postcard can have a big impact. </p>
       </div>
 
       <div className="bg-quote container flex items-center justify-center h-screen mx-auto">
         <blockquote className="bg-black font-serif mx-4 p-4 text-center text-white md:p-8">
           <p className="font-bold italic text-3xl">
-            &ldquo;Providing friendships, one postcard at a time.&rdquo;
+            &ldquo;Providing friendship, one postcard at a time.&rdquo;
           </p>
         </blockquote>
       </div>
 
       <div className="font-serif leading-normal mx-auto py-12 px-4 max-w-lg">
         <p className="mb-6 text-xl md:text-4xl uppercase font-bold">HOW TO GET STARTED.</p>
-        <p className="mb-4 text-lg">Quae commodi reiciendis dignissimos. Rerum molestiae hic dolores assumenda dolor! Corrupti reiciendis maxime fuga, recusandae obcaecati officia cum temporibus dicta quibusdam praesentium, magni, cumque aperiam iusto sequi illum molestiae non.</p>
-        <p className="mb-4 text-lg">In excepturi repellendus eum, qui corrupti rerum perferendis harum adipisci voluptate? Nihil, quidem deleniti libero officia dicta vel asperiores velit molestiae blanditiis, dolore voluptatibus excepturi laudantium at veniam illo. Dolor!</p>
+        <p className="mb-4 text-lg">Providing friendship through a postcard is simple. After signing up, you can use our in-browser editor to create something that is unique that only you can make. Upload images, draw pictures, write messages; the possibilities to make an inspiring postcard are endless.</p>
+        <p className="mb-4 text-lg">After you submit your card, it will be send to the manager of the organization you chose, and they will hand-deliver it!</p>
       </div>
 
       <div className="bg-footer container flex items-center justify-center h-screen mx-auto">
@@ -38,8 +38,9 @@ function Home({ user }) {
 
       <div className="font-serif leading-normal mx-auto py-12 px-4 max-w-lg">
         <p className="mb-6 text-xl md:text-4xl uppercase font-bold">ORGANIZATION ADMINSTRATORS.</p>
-        <p className="mb-4 text-lg">Quae commodi reiciendis dignissimos. Rerum molestiae hic dolores assumenda dolor! Corrupti reiciendis maxime fuga, recusandae obcaecati officia cum temporibus dicta quibusdam praesentium, magni, cumque aperiam iusto sequi illum molestiae non.</p>
-        <p className="mb-4 text-lg">In excepturi repellendus eum, qui corrupti rerum perferendis harum adipisci voluptate? Nihil, quidem deleniti libero officia dicta vel asperiores velit molestiae blanditiis, dolore voluptatibus excepturi laudantium at veniam illo. Dolor!</p>
+        <p className="mb-4 text-lg">If you are an organization wishing to get postcards in the hands of your patients, you can easily add recipients to our database through the user-friendly interface. Changes to your list are painless so that you can spend less time on our site and more time with those who depend on you.</p>
+        <p className="mb-4 text-lg">In addition to adding recipients, you will also be able to view, save, and print postcards sent to your patients in a few clicks.</p>
+        <p className="mb-4 text-lg">Have questions? Email us at admin@pg.com</p>
       </div>
 
       {/* <div className='text-5xl'>Home</div> */}
