@@ -17,6 +17,8 @@ Rails.application.routes.draw do
 
   post '/new_recipient', to: 'recipients#create'
   get '/inst-recipients', to: 'recipients#recipients_collect'
+
+  get '/last-image-url', to: 'users#last_image_url'
   
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!

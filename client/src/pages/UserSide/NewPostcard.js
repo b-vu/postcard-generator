@@ -9,7 +9,6 @@ function NewPostcard({ user }) {
   const [backgroundcolor, setBackgroundColor] = useState(null);
   const [institutions, setInstitutions] = useState([]);
   const [selectedInstitution, setSelectedInstitution] = useState("");
-  const [recipients, setRecipients] = useState([]);
 
   useEffect(() => {
     setCanvas(initCanvas());
@@ -23,8 +22,8 @@ function NewPostcard({ user }) {
 
   const initCanvas = () => (
     new fabric.Canvas('canvas', {
-      height: 800,
-      width: 800,
+      height: 700,
+      width: 1000,
     })
   )
 
@@ -137,6 +136,24 @@ function NewPostcard({ user }) {
     return postcardImg;
   }
 
+  //Setting a canvas background with an image uploaded by the user
+  function createImageBackgoundCanvas(e) {
+    e.preventDefault();
+
+    const file = selectedFile;
+    const reader = new FileReader();
+    reader.onload = function(f) {
+      const data = f.target.result;
+      fabric.Image.fromURL(data, function(img) {
+        canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas), {
+          scaleX: canvas.width / img.width,
+          scaleY: canvas.height / img.height
+        });
+      });
+    };
+    reader.readAsDataURL(file);
+  }
+
   // POST request for uploaded images
   function sendPostRequest(data, method) {
     let formData = new FormData();
@@ -166,11 +183,6 @@ function NewPostcard({ user }) {
     setSelectedFile(e.target.files[0])
   }
 
-  function handleFormUpload(e) {
-    e.preventDefault();
-    sendPostRequest(selectedFile, "upload");
-  }
-
   function submitImage() {
     const data = createDummyCanvas();
     sendPostRequest(data, "submit");
@@ -182,15 +194,12 @@ function NewPostcard({ user }) {
 
   return (
     <>
-
       <h3>Create your Postcard</h3>
 
-      <form onSubmit={handleFormUpload}>
+      <form onSubmit={createImageBackgoundCanvas}>
         <input type="file" onChange={handleSelectedFileChange}></input>
         <button>Upload</button>
       </form>
-
-      {/* <img src="" alt="Postcard"></img> */}
 
       <div className='canvas-tool-box'>
         <button onClick={() => addRect(canvas)}>Rectangle</button>
