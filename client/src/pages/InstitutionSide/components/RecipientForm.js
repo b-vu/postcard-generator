@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 
-function RecipientForm( { user } ) {
+function RecipientForm( { user, handleAddRecipient } ) {
     const [formData, setFormData] = useState({
         first_name: "", 
         last_name: ""
@@ -18,7 +18,7 @@ function RecipientForm( { user } ) {
             body: JSON.stringify(recipient)
           })
           .then(res => res.json())
-          .then(recipient => console.log(recipient));
+          .then(recipient => handleAddRecipient(recipient));
         
     }
 
