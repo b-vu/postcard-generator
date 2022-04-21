@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   post '/inst-signup', to: 'institutions#create'
 
   post '/new_recipient', to: 'recipients#create'
+  get '/inst-recipients', to: 'recipients#recipients_collect'
   
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!
