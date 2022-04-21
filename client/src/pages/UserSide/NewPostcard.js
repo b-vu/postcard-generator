@@ -41,7 +41,7 @@ function NewPostcard({ user }) {
     const rect = new fabric.Rect({
       height: 280,
       width: 200,
-      fill: '#FF6699'
+      fill: '#B2BEB5'
     });
     canvi.add(rect);
     canvi.renderAll();
@@ -50,7 +50,7 @@ function NewPostcard({ user }) {
   const addCirc = canvi => {
     const circ = new fabric.Circle({
       radius: 50,
-      fill: '#FF6699'
+      fill: '#B2BEB5'
     });
     canvi.add(circ);
     canvi.renderAll();
@@ -88,18 +88,6 @@ function NewPostcard({ user }) {
     canvi.add(text);
     canvi.setActiveObject(text);
     canvi.renderAll();
-  }
-
-  function changeTextClr() {
-    // const textColor = document.querySelector('#text-color')
-    // canvas.getActiveObject().setColor(textColor)
-    // canvas.renderAll();
-    console.log("text color is changing")
-  }
-
-  function changeFont(e) {
-    // canvas.getActiveObject().set("fontFamily", e.target.value);
-    // canvas.renderAll();
   }
 
   function addDrawing() {
@@ -197,37 +185,12 @@ function NewPostcard({ user }) {
 
   return (
     <>
-      <h3>Create your Postcard</h3>
-
       <form onSubmit={createImageBackgoundCanvas}>
         <input type="file" onChange={handleSelectedFileChange}></input>
         <button>Upload</button>
       </form>
 
-      <div className='canvas-tool-box'>
-        <button onClick={() => addRect(canvas)}>Rectangle</button>
-        <button onClick={() => addCirc(canvas)}>Circle</button>
-        <button onClick={() => addLine(canvas)}>Line</button>
-        <button onClick={() => addText(canvas)}>Add Text</button>
-        <button onClick={() => addDrawing(canvas)}>Enter Drawing Mode</button>
-        <button onClick={() => cancelDrawing(canvas)}>Exit Drawing Mode</button>
-        <button onClick={() => clearCanvas(canvas)}>Clear Canvas</button>
-        <button onClick={submitImage}>Submit</button>
-        
-        <form onSubmit={e => addImg(e, imgURL, canvas)}>
-          <div>
-            <input 
-              type="text" 
-              value={imgURL} 
-              onChange={ e => setImgURL(e.target.value)} 
-            />
-            <button type="submit">Add Image from URL</button>
-          </div>
-        </form>
-        
-        <button onClick={handleDownloadClick}>Download Postcard</button>
-
-        <select placeholder="Select an Institution" name="institutionId" value={selectedInstitution} onChange={handleInstitutionChange}>
+      <select placeholder="Select an Institution" name="institutionId" value={selectedInstitution} onChange={handleInstitutionChange}>
           <option value="" disabled>Select an Institution</option>
           {
             institutions.map(institution => <option key={institution.id} value={institution.id}>{institution.name}</option>)
@@ -246,19 +209,136 @@ function NewPostcard({ user }) {
           : null
         }
 
-        <div id="text-controls">
-        <input type="color" value="" id="text-color" size="10" onChange={changeTextClr} />
-        <label htmlFor="font-family">Font family:</label>
-          <select id="font-family" defaultValue={"cormorant garamond"} onChange={changeFont}>
-            <option value="poppins">Poppins</option>
-            <option value="cormorant garamond">Cormorant Garamond</option>
-            <option value="patrick hand">Patrick Hand</option>
-            <option value="special elite">Special Elite</option>
-          </select>
-        </div>
+      <div className="w-95 h-full shadow-md bg-white px-1 absolute" id="sidenavExample">
+        <ul className="relative">
+          {/* SHAPES */}
+          <li className="relative" id="sidenavEx1">
+            <span className="flex items-center text-lg py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-100 transition duration-300 ease-in-out cursor-pointer" data-mdb-ripple="true" data-mdb-ripple-color="dark" data-bs-toggle="collapse" data-bs-target="#collapseSidenavEx1" aria-expanded="true" aria-controls="collapseSidenavEx1">
+              <span className='px-3'>Shapes</span>
+              <svg class="h-6 w-6 text-black"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <circle cx="6" cy="6" r="2" />  <circle cx="18" cy="6" r="2" />  <circle cx="6" cy="18" r="2" />  <circle cx="18" cy="18" r="2" />  <line x1="6" y1="8" x2="6" y2="16" />  <line x1="8" y1="6" x2="16" y2="6" />  <line x1="8" y1="18" x2="16" y2="18" />  <line x1="18" y1="8" x2="18" y2="16" /></svg>
+            </span>
+            <ul className="relative accordion-collapse collapse" id="collapseSidenavEx1" aria-labelledby="sidenavEx1" data-bs-parent="#sidenavExample">
+              <li className="relative">
+                <button className="flex items-center text-base py-4 pl-12 pr-6 h-6 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-100 transition duration-300 ease-in-out" data-mdb-ripple="true" data-mdb-ripple-color="dark" onClick={() => addRect(canvas)}> Rectangle </button>
+              </li>
+              <li className="relative">
+                <button className="flex items-center text-base py-4 pl-12 pr-6 h-6 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-100 transition duration-300 ease-in-out" data-mdb-ripple="true" data-mdb-ripple-color="dark" onClick={() => addCirc(canvas)}> Circle </button>
+              </li>
+              <li className="relative">
+                <button className="flex items-center text-base py-4 pl-12 pr-6 h-6 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-100 transition duration-300 ease-in-out" data-mdb-ripple="true" data-mdb-ripple-color="dark" onClick={() => addLine(canvas)}> Line </button>
+              </li>
+            </ul>
+          </li>
+          {/* CANVAS BG COLOR */}
+          <li className="relative" id="sidenavEx2">
+            <span className="flex items-center text-lg py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-100 transition duration-300 ease-in-out cursor-pointer" data-mdb-ripple="true" data-mdb-ripple-color="dark" data-bs-toggle="collapse" data-bs-target="#collapseSidenavEx2" aria-expanded="false" aria-controls="collapseSidenavEx2">
+              <span className='px-3'>Background Color</span>
+              <svg class="h-6 w-6 text-black"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/>
+              </svg>
+            </span>
 
-        <canvas id="canvas" />
-        <input type="color" value="#001A57" id="clr" onChange={pickColor}/>
+            <ul className="relative accordion-collapse collapse" id="collapseSidenavEx2" aria-labelledby="sidenavEx2" data-bs-parent="#sidenavExample">
+              <li className="relative">
+                <input className='' type="color" value="#001A57" id="clr" onChange={pickColor}/>
+              </li>
+            </ul>
+          </li>
+          {/* TEXT */}
+          <li className="relative" id="sidenavEx2">
+            <span className="flex items-center text-lg py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-100 transition duration-300 ease-in-out cursor-pointer" data-mdb-ripple="true" data-mdb-ripple-color="dark" data-bs-toggle="collapse" data-bs-target="#collapseSidenavEx2" aria-expanded="false" aria-controls="collapseSidenavEx2">
+              <span className='px-3'>Add Text</span>
+              <svg class="h-6 w-6 text-black"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <line x1="4" y1="20" x2="7" y2="20" />  <line x1="14" y1="20" x2="21" y2="20" />  <line x1="6.9" y1="15" x2="13.8" y2="15" />  <line x1="10.2" y1="6.3" x2="16" y2="20" />  <polyline points="5 20 11 4 13 4 20 20" /></svg>
+            </span>
+
+            <ul className="relative accordion-collapse collapse" id="collapseSidenavEx2" aria-labelledby="sidenavEx2" data-bs-parent="#sidenavExample">
+              <li className="relative">
+                    <button className="flex items-center text-base py-4 pl-12 pr-6 h-6 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-100 transition duration-300 ease-in-out" data-mdb-ripple="true" data-mdb-ripple-color="dark" onClick={() => addText(canvas)}> Add Text </button>
+              </li>
+            </ul>
+          </li>
+          {/* DRAW */}
+          <li className="relative" id="sidenavEx3">
+            <span className="flex items-center text-lg py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-100 transition duration-300 ease-in-out cursor-pointer" data-mdb-ripple="true" data-mdb-ripple-color="dark" data-bs-toggle="collapse" data-bs-target="#collapseSidenavEx3" aria-expanded="false" aria-controls="collapseSidenavEx3">
+              <span className='px-3'>Draw</span>
+              <svg class="h-6 w-6 text-black"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />  <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" /></svg>
+              <svg aria-hidden="true" focusable="false" data-prefix="fas" className="w-3 h-3 ml-auto" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"></svg>
+            </span>
+            <ul className="relative accordion-collapse collapse" id="collapseSidenavEx3" aria-labelledby="sidenavEx3" data-bs-parent="#sidenavExample">
+              <li className="relative">
+                    <button className="flex items-center text-base py-4 pl-12 pr-6 h-6 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-100 transition duration-300 ease-in-out" data-mdb-ripple="true" data-mdb-ripple-color="dark" onClick={() => addDrawing(canvas)}> Enter Drawing Mode </button>
+              </li>
+              <li className="relative">
+                    <button className="flex items-center text-base py-4 pl-12 pr-6 h-6 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-100 transition duration-300 ease-in-out" data-mdb-ripple="true" data-mdb-ripple-color="dark" onClick={() => cancelDrawing(canvas)}> Exit Drawing Mode </button>
+              </li>
+            </ul>
+          </li>
+          {/* IMAGES */}
+          <li className="relative" id="sidenavEx2">
+            <span className="flex items-center text-lg py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-100 transition duration-300 ease-in-out cursor-pointer" data-mdb-ripple="true" data-mdb-ripple-color="dark" data-bs-toggle="collapse" data-bs-target="#collapseSidenavEx2" aria-expanded="false" aria-controls="collapseSidenavEx2">
+              <span className='px-3'>Add Images</span>
+              <svg class="h-6 w-6 text-black"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />  <circle cx="8.5" cy="8.5" r="1.5" />  <polyline points="21 15 16 10 5 21" /></svg>
+            </span>
+
+            <ul className="relative accordion-collapse collapse" id="collapseSidenavEx2" aria-labelledby="sidenavEx2" data-bs-parent="#sidenavExample">
+              <form className= "flex items-center text-base py-4 pl-12 pr-6 h-6 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-100 transition duration-300 ease-in-out" onSubmit={e => addImg(e, imgURL, canvas)}>
+                <div>
+                  <input 
+                    type="text" 
+                    value={imgURL} 
+                    onChange={ e => setImgURL(e.target.value)} 
+                  />
+                  <button type="submit">Upload</button>
+                </div>
+              </form>
+            </ul>
+          </li>
+          {/* DOWNLOAD */}
+          <li className="relative" id="sidenavEx2">
+            <span className="flex items-center text-lg py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-100 transition duration-300 ease-in-out cursor-pointer" data-mdb-ripple="true" data-mdb-ripple-color="dark" data-bs-toggle="collapse" data-bs-target="#collapseSidenavEx2" aria-expanded="false" aria-controls="collapseSidenavEx2">
+              <span className='px-3'>Download</span>
+              <svg class="h-6 w-6 text-black"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />  <polyline points="7 11 12 16 17 11" />  <line x1="12" y1="4" x2="12" y2="16" /></svg>
+            </span>
+
+            <ul className="relative accordion-collapse collapse" id="collapseSidenavEx2" aria-labelledby="sidenavEx2" data-bs-parent="#sidenavExample">
+            <li className="relative">
+              <button className="flex items-center text-base py-4 pl-12 pr-6 h-6 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-100 transition duration-300 ease-in-out" data-mdb-ripple="true" data-mdb-ripple-color="dark" onClick={handleDownloadClick}> Save Postcard</button>
+              </li>
+            </ul>
+          </li>
+          {/* CLEAR CANVAS */}
+          <li className="relative" id="sidenavEx2">
+            <span className="flex items-center text-lg py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-100 transition duration-300 ease-in-out cursor-pointer" data-mdb-ripple="true" data-mdb-ripple-color="dark" data-bs-toggle="collapse" data-bs-target="#collapseSidenavEx2" aria-expanded="false" aria-controls="collapseSidenavEx2">
+              <span className='px-3'>Erase</span>
+              <svg class="h-6 w-6 text-black"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <path d="M19 19h-11l-4 -4a1 1 0 0 1 0 -1.41l10 -10a1 1 0 0 1 1.41 0l5 5a1 1 0 0 1 0 1.41l-9 9" />  <path d="M18 12.3l-6.3 -6.3" /></svg>
+            </span>
+            <ul className="relative accordion-collapse collapse" id="collapseSidenavEx2" aria-labelledby="sidenavEx2" data-bs-parent="#sidenavExample">
+            <li className="relative">
+              <button className="flex items-center text-base py-4 pl-12 pr-6 h-6 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-100 transition duration-300 ease-in-out" data-mdb-ripple="true" data-mdb-ripple-color="dark" onClick={() => clearCanvas(canvas)}> Clear Postcard</button>
+              </li>
+            </ul>
+          </li>
+          {/* SEND POSTCARD */}
+          <li className="relative" id="sidenavEx2">
+            <span className="flex items-center text-lg py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-100 transition duration-300 ease-in-out cursor-pointer" data-mdb-ripple="true" data-mdb-ripple-color="dark" data-bs-toggle="collapse" data-bs-target="#collapseSidenavEx2" aria-expanded="false" aria-controls="collapseSidenavEx2">
+              <span className='px-3'>Submit</span>
+              <svg class="h-6 w-6 text-black"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <line x1="22" y1="2" x2="11" y2="13" />  <polygon points="22 2 15 22 11 13 2 9 22 2" /></svg>
+            </span>
+
+            <ul className="relative accordion-collapse collapse" id="collapseSidenavEx2" aria-labelledby="sidenavEx2" data-bs-parent="#sidenavExample">
+            <li className="relative">
+              <button className="flex items-center text-base py-4 pl-12 pr-6 h-6 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-100 transition duration-300 ease-in-out" data-mdb-ripple="true" data-mdb-ripple-color="dark" onClick={submitImage}> Send Postcard</button>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <div className="grid place-items-center h-screen">
+          {/* <h2>Create your Postcard</h2> */}
+          <canvas id="canvas" />
+        </div>
       </div>
 
 
