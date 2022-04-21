@@ -23,7 +23,7 @@ function InstLogin({ setUser }) {
 
     function onLogin(user) {
     setUser(user)
-    navigate("/org")
+    navigate("/org/recipients")
     }
 
     function handleFormSubmit(e) {
