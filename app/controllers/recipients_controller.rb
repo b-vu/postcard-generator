@@ -13,6 +13,12 @@ class RecipientsController < ApplicationController
         end
     end
 
+    def recipients_collect
+        recipients = Recipient.where(institution_id: session[:institution_id])
+        render json: recipients
+    end
+
+
     private
 
     def recipient_params
