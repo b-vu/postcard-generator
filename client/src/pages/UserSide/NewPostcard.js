@@ -9,6 +9,7 @@ function NewPostcard({ user }) {
   const [backgroundcolor, setBackgroundColor] = useState(null);
   const [institutions, setInstitutions] = useState([]);
   const [selectedInstitution, setSelectedInstitution] = useState("");
+  const [selectedRecipient, setSelectedRecipient] = useState("");
 
   useEffect(() => {
     setCanvas(initCanvas());
@@ -96,11 +97,9 @@ function NewPostcard({ user }) {
     console.log("text color is changing")
   }
 
-  function changeFont() {
-  // document.getElementById('font-family')
-  //   canvas.getActiveObject().setFontFamily(this.value);
-  //   canvas.renderAll();
-    console.log("font is changing")
+  function changeFont(e) {
+    // canvas.getActiveObject().set("fontFamily", e.target.value);
+    // canvas.renderAll();
   }
 
   function addDrawing() {
@@ -160,6 +159,7 @@ function NewPostcard({ user }) {
     formData.append("image", data);
     formData.append("method", method);
     formData.append("user_id", user.id);
+    formData.append("recipient_id", selectedRecipient)
     
     fetch("/postcards", {
       method: "POST",
@@ -175,7 +175,6 @@ function NewPostcard({ user }) {
     link.download = "my-postcard.png";
     link.href = postcardImg;
     link.click();
-    console.log('Download button clicked')
   }
 
 
@@ -190,6 +189,10 @@ function NewPostcard({ user }) {
 
   function handleInstitutionChange(e) {
     setSelectedInstitution(e.target.value);
+  }
+
+  function handleRecipientChange(e) {
+    setSelectedRecipient(e.target.value);
   }
 
   return (
@@ -234,16 +237,21 @@ function NewPostcard({ user }) {
         {/* Conditional rendering of recipients based on selected instiution */}
         {
           selectedInstitution !== "" ?
-          institutions.filter(i => i.id === parseInt(selectedInstitution))[0].recipients.map(r => <p key={r.id}>{r.first_name} {r.last_name}</p>)
+          <select placeholder="Select a Recipient" name="recipientId" value={selectedRecipient} onChange={handleRecipientChange}>
+            <option value="" disabled>Select a Recipient</option>
+            {
+              institutions.filter(i => i.id === parseInt(selectedInstitution))[0].recipients.map(r => <option key={r.id} value={r.id}>{r.first_name} {r.last_name}</option>)
+            }
+          </select>
           : null
         }
 
         <div id="text-controls">
         <input type="color" value="" id="text-color" size="10" onChange={changeTextClr} />
-        <label for="font-family">Font family:</label>
-          <select id="font-family" onChange={changeFont}>
+        <label htmlFor="font-family">Font family:</label>
+          <select id="font-family" defaultValue={"cormorant garamond"} onChange={changeFont}>
             <option value="poppins">Poppins</option>
-            <option value="cormorant garamond" selected>Cormorant Garamond</option>
+            <option value="cormorant garamond">Cormorant Garamond</option>
             <option value="patrick hand">Patrick Hand</option>
             <option value="special elite">Special Elite</option>
           </select>

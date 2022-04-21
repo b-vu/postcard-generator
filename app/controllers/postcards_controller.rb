@@ -29,7 +29,7 @@ class PostcardsController < ApplicationController
             message: "Test",
             image: image,
             user_id: params[:user_id],
-            recipient_id: 1
+            recipient_id: params[:recipient_id]
         })
         render json: postcard, status: :created
 
