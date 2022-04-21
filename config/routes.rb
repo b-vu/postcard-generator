@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :postcards, only: [:index, :show, :create]
-  resources :institutions, only: [:index, :show]
-  resources :recipients, only: [:index]
+  resources :institutions, only: [:index]
+  resources :recipients, only: [:index, :show, :update, :destroy]
  
   #standard user signup/login/logout
   post '/signup', to: 'users#create'
