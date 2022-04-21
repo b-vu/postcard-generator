@@ -1,35 +1,98 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, Fragment } from 'react'
+import EditableRow from './EditableRow'
+import ReadOnlyRow from './ReadOnlyRow'
 
-function RecipientList( { user, recipients }) {
-    // const [recipients, setRecipient] = useState([])
+function RecipientList( { recipients, handleRecipientsEdit }) {
+    const [editRecipientId, setEditRecipientId] = useState(null)
+    const [editFormData, setEditFormData] = useState({
+        first_name: "", 
+        last_name: ""
+    });
 
-    // useEffect(() => {
-    //     fetch("/inst-recipients")
-    //     .then(resp => resp.json())
-    //     .then(data => console.log(data))
-    // }, [])
+    function editRecipient (e, recipient) {
+        e.preventDefault();
+        setEditRecipientId(recipient.id)
+
+        const formValues = {
+            first_name: recipient.first_name,
+            last_name: recipient.last_name,
+        }
+        setEditFormData(formValues)
+
+    }
+
+    function handleEditFormChange(e) {
+        e.preventDefault();
+        setEditFormData({
+            ...editFormData,
+            [e.target.name]: e.target.value
+        })
+
+
+    }
+
+    function handleEditFormSubmit (e) {
+        e.preventDefault();
+        const editedRecipient = editFormData
+        editedRecipient.id = editRecipientId
+        
+        const newRecipients = [...recipients]
+        const index = recipients.findIndex((r) => r.id === editRecipientId)
+        newRecipients[index] = editedRecipient
+
+        fetch(`/recipients/${editRecipientId}`, {
+            method: 'PATCH',
+            body: JSON.stringify(editFormData),
+            headers: {'Content-type': 'application/json'}
+        })
+        .then(response => response.json())
+        .then(data => console.log(data))
+
+        handleRecipientsEdit(newRecipients);
+        setEditRecipientId(null)
+    }
+
+    function handleDelete (e, id) {
+        e.preventDefault();
+        console.log(id)
+        fetch(`/recipients/${id}`, {
+            method: 'DELETE' 
+        })
+        .then(resp => resp.json())
+        .then(r => console.log(r))
+        
+        const newRecipients = [...recipients]
+
+        const index = recipients.findIndex((r) => r.id === id)
+        newRecipients.splice(index, 1)
+
+        handleRecipientsEdit(newRecipients)
+
+    }
+
     let recipientElements = recipients.map(recipient => {
         return (
-            <tr>
-                <th>{recipient.first_name}</th>
-                <th>{recipient.last_name}</th>
-                <th>
-                    <button>Edit</button>
-                    <button>Delete</button>
-                </th>
-            </tr>
+            <Fragment>
+                {editRecipientId === recipient.id ? (
+                    <EditableRow key={recipient.id} editFormData={editFormData} handleEditFormChange={handleEditFormChange} /> 
+                ) : (
+                    <ReadOnlyRow key={recipient.first_name} recipient={recipient} editRecipient={editRecipient} handleDelete={handleDelete} />)
+                }
+            </Fragment>
         )
     })
   
     return (
-        <table>
-            <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Actions</th>
-            </tr>
-            {recipientElements}
-        </table>
+        <form onSubmit={handleEditFormSubmit}>
+            <table>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Actions</th>
+                </tr>
+                {recipientElements}
+            </table>
+        </form>
     )
 }
 
