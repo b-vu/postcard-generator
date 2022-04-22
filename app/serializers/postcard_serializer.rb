@@ -1,5 +1,5 @@
 class PostcardSerializer < ActiveModel::Serializer
-  attributes :id, :message, :user_id, :recipient_id, :image
+  attributes :id, :message, :user_id, :recipient_id, :image, :user_fullname
   include Rails.application.routes.url_helpers
 
   # Creates attributes that are attached to the image property of the postcard
@@ -14,6 +14,10 @@ class PostcardSerializer < ActiveModel::Serializer
   # Creates the image URL from the blob to the S3 bucket
   def image_url(image)
     rails_blob_path(image, only_path: true)
+  end
+
+  def user_fullname
+    "#{object.user.first_name} #{object.user.last_name}"
   end
 end
 
