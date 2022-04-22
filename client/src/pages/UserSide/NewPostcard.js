@@ -210,31 +210,7 @@ function NewPostcard({ user }) {
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 justify-center">
-      {/* <form onSubmit={createImageBackgoundCanvas}>
-        <input type="file" onChange={handleSelectedFileChange}></input>
-        <button>Upload</button>
-      </form> */}
-
-      {/* <select placeholder="Select an Institution" name="institutionId" value={selectedInstitution} onChange={handleInstitutionChange}>
-        <option value="" disabled>Select an Institution</option>
-        {
-          institutions.map(institution => <option key={institution.id} value={institution.id}>{institution.name}</option>)
-        }
-      </select> */}
-
-        {/* Conditional rendering of recipients based on selected instiution */}
-        {/* {
-          selectedInstitution !== "" ?
-          <select placeholder="Select a Recipient" name="recipientId" value={selectedRecipient} onChange={handleRecipientChange}>
-            <option value="" disabled>Select a Recipient</option>
-            {
-              institutions.filter(i => i.id === parseInt(selectedInstitution))[0].recipients.map(r => <option key={r.id} value={r.id}>{r.first_name} {r.last_name}</option>)
-            }
-          </select>
-          : null
-        } */}
-
-      <div className="w-96 h-full shadow-md bg-white px-1" id="sidenavExample">
+      <div className="w-96 h-screen shadow-md bg-white px-1 sticky top-20" id="sidenavExample">
         <ul className="relative">
           {/* SHAPES */}
           <li className="relative" id="sidenavEx1">
