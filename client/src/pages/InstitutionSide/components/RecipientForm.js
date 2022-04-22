@@ -32,11 +32,10 @@ function RecipientForm( { user, handleAddRecipient } ) {
           });
     }
 
-    // className='w-1/2 m-auto bg-white rounded-lg border border-primaryBorder shadow-default py-10 px-16'
-    //py-10 pr-6 m-auto
+
   return (
     <div className='w-1/2 bg-white rounded-lg  shadow-default my-8'>
-      <form className='' onSubmit={onSubmit}>
+      <form onSubmit={onSubmit}>
         <label>
           <div className={`font-serif text-xl`}> New Recipient's First Name</div>
           <input className={`font-serif w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`} type="text" name="first_name" value={formData.first_name} onChange={handleFormChange} placeholder="first name"></input>
@@ -50,7 +49,6 @@ function RecipientForm( { user, handleAddRecipient } ) {
         <button className={`font-serif text-center py-2 px-4 bg-stone-200 rounded-full text-base hover:bg-stone-400 transition duration-300 ease-in-out flex items-center animate-bounce"`} >Add Recipient</button>
       </form>
     </div>
-
   )
 }
 
