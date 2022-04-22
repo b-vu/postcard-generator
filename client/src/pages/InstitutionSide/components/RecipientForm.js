@@ -36,12 +36,12 @@ function RecipientForm( { user, handleAddRecipient } ) {
     <form onSubmit={onSubmit}>
           <label>
             <span> New Recipient's First Name</span>
-            <input type="text" name="first_name" value={formData.first_name} onChange={handleFormChange} placeholder="first name"></input>
+            <input type="text" required="required" name="first_name" value={formData.first_name} onChange={handleFormChange} placeholder="first name"></input>
           </label>
           
           <label>
             <span>New Recipient's Last Name</span>
-            <input type="text" name="last_name" value={formData.last_name} onChange={handleFormChange} placeholder="last name"></input>
+            <input type="text" required="required" name="last_name" value={formData.last_name} onChange={handleFormChange} placeholder="last name"></input>
           </label>
 
           <button>Add Recipient</button>
