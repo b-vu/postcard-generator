@@ -5,7 +5,6 @@ import Navbar from "./Layout/Navbar"
 function Layout({ user, setUser }) {
   return (
     <div>      
-      <h1>Layout</h1>
       <main>
         <Navbar user={user} setUser={setUser} />
         <Outlet />
