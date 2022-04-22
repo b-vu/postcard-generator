@@ -1,6 +1,5 @@
 import React from "react"
 import { Link } from "react-router-dom"
-import postcardBorder from "../../../assets/postcard-border.jpeg"
 
 function PostcardCard({ postcards }) {
     return(
@@ -8,12 +7,7 @@ function PostcardCard({ postcards }) {
             {
                 postcards.map(postcard => {
                     return <div key={postcard.id} className="rounded overflow-hidden shadow-md shadow-gray-600">
-                        <Link to="/"><img className="w-full" src={postcard.image.url} alt="Postcard" /></Link>
-                        <div className="relative">
-                            <img src={postcardBorder} alt="Postcard" />
-                            <p className="absolute top-5 left-6 font-serif text-xl md:text-2xl uppercase font-bold">From: {postcard.user_fullname}</p>
-                            <p className="absolute top-12 left-6 font-serif text-md pr-6">{postcard.message}</p>
-                        </div>
+                        <Link to={`/org/postcards/${postcard.id}`}><img className="w-full" src={postcard.image.url} alt="Postcard" /></Link>
                     </div>
                 })
             }
