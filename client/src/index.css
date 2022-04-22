@@ -5,3 +5,17 @@
 /* .design-sidebar {
   @apply flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-100 transition duration-300 ease-in-out cursor-pointer;
 } */
+
+#canvas {
+  background-image: url("./assets/postcard-message.webp");
+  background-position: left bottom, left top;
+  background-size: 100% 50%;
+  background-repeat: no-repeat;
+}
+
+/* #canvas {
+  background-image: url("./assets/postcard-message.webp"), url("./assets/postcard-generator.PNG");
+  background-position: left bottom, left top;
+  background-size: 100% 50%;
+  background-repeat: no-repeat;
+} */

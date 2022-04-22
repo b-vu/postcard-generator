@@ -42,16 +42,6 @@ function Home({ user }) {
         <p className="mb-4 text-xl">In addition to adding recipients, you will also be able to view, save, and print postcards sent to your patients in a few clicks.</p>
         <p className="mb-4 text-xl">Have questions? Email us at admin@pg.com</p>
       </div>
-
-      {/* <div className='text-5xl'>Home</div> */}
-      {/* {
-        user ? 
-        user.postcards.map(postcard => {
-          return <img src={postcard.image.url} alt="Postcard"></img>
-        })
-        :
-        null
-      } */}
     </>
   )
 }
