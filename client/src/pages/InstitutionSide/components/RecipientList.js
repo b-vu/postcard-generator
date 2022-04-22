@@ -81,17 +81,17 @@ function RecipientList( { recipients, handleRecipientsEdit }) {
             </Fragment>
         )
     })
-  
+    //m-auto flex justify-center items-center
     return (
         <form onSubmit={handleEditFormSubmit}>
-            <table>
-                <tr>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Actions</th>
-                </tr>
-                {recipientElements}
-            </table>
+                <table className="text-left mx-auto w-full font-serif text-xl ">
+                    <tr className="text-left border-b border-t border-black border-spacing-2 my-8">
+                        <th className="py-3">First Name</th>
+                        <th className="py-3">Last Name</th>
+                        <th className="py-3">Actions</th>
+                    </tr>
+                    {recipientElements}
+                </table>
         </form>
     )
 }
