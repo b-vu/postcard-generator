@@ -22,7 +22,8 @@ function Recipients( { user } ) {
 
 
     return (
-        <div>
+        <div className="container w-1/2 mx-auto py-8 px-4">
+            <h1 className="block  text-black text-5xl text-left pt-10 pr-6">Recipients</h1>
             <RecipientForm handleAddRecipient={handleAddRecipient} user={user} />
             <RecipientList user={user} recipients={recipients} handleRecipientsEdit={handleRecipientsEdit} />
         </div>

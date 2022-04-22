@@ -2,8 +2,8 @@ import React from 'react'
 
 function EditableRow( { editFormData, handleEditFormChange }) {
   return (
-    <tr>
-        <td>
+    <tr className="text-left border-b border-black">
+        <td className="py-3">
             <input 
                 type="text" 
                 required="required" 
@@ -13,7 +13,7 @@ function EditableRow( { editFormData, handleEditFormChange }) {
                 onChange={handleEditFormChange}
             ></input>
         </td>
-        <td>
+        <td className="py-3">
             <input 
                 type="text" 
                 required="required" 
@@ -23,8 +23,8 @@ function EditableRow( { editFormData, handleEditFormChange }) {
                 onChange={handleEditFormChange}
             ></input>
         </td>
-        <td>
-            <button type="submit">Save</button>
+        <td className="py-3">
+            <button type="submit" className={'underline hover:text-green-500 px-1'}>Save</button>
         </td>
 
     </tr>
