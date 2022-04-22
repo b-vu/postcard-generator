@@ -60,10 +60,22 @@ function Navbar( {user, setUser} ) {
 
 
     return (
-    <nav>
-        {homeLink}
-        {newCreation}
-        {button}
+    <nav className='flex justify-between items-center py-8 mx-auto h-20 bg-stone-200 font-sans text-black text-xl sticky top-0 z-30 w-full px-2 py-4 sm:px-4 shadow-sm' role='navigation'>
+        <div className="flex items-center">
+            <svg class="h-8 w-8 text-black"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />  <polyline points="22,6 12,13 2,6" /></svg>
+            <h3 class="px-2 text-2xl font-medium text-black">POSTCARD GENERATOR</h3>
+        </div>
+        <div className='pr-10 md:block'>
+            <button className='p-4 bg-stone-200 rounded-full hover:bg-stone-400 transition duration-300 ease-in-out hover:animate-bounce'>
+                {homeLink}
+            </button>
+            <button className='p-4 bg-stone-200 rounded-full hover:bg-stone-400 transition duration-300 ease-in-out hover:animate-bounce'>
+                {newCreation}
+            </button>
+            <button className='p-4 bg-stone-200 rounded-full hover:bg-stone-400 transition duration-300 ease-in-out hover:animate-bounce'>
+                {button}
+            </button>
+        </div>
     </nav>
     )
 }

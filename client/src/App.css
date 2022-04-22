@@ -1,5 +1,5 @@
 #canvas {
-  border: 1px solid black;
+  border: 2px solid black;
 }
 
 .bg-header {
@@ -13,6 +13,6 @@
 }
 
 .bg-footer {
-  background: url(https://images.pexels.com/photos/1157151/pexels-photo-1157151.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2) center center no-repeat;
+  background: url(https://images.pexels.com/photos/8061477/pexels-photo-8061477.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2) center center no-repeat;
   background-attachment: fixed;
 }
