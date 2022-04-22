@@ -31,7 +31,7 @@ function Navbar( {user, setUser} ) {
     let homeLink
     if (user) {
         if (user.manager_name) {
-            homeLink = <Link to="/org">Home</Link>
+            homeLink = <Link to="/org/recipients/postcards">Postcards</Link>
         } else {
             homeLink = <Link to="/">Home</Link>
         } 

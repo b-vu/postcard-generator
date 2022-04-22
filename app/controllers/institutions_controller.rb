@@ -18,7 +18,7 @@ class InstitutionsController < ApplicationController
     def show
     institution = Institution.find_by(id: session[:institution_id])
         if institution
-            render json: institution, status: :ok
+            render json: institution, status: :ok, include: ["recipients", "recipients.postcards"]
         else
             render json: {error: "Not authorized"}, status: :unauthorized
         end
