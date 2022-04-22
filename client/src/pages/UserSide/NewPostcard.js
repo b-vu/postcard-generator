@@ -209,7 +209,7 @@ function NewPostcard({ user }) {
   }
 
   return (
-    <>
+    <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 justify-center">
       {/* <form onSubmit={createImageBackgoundCanvas}>
         <input type="file" onChange={handleSelectedFileChange}></input>
         <button>Upload</button>
@@ -234,7 +234,7 @@ function NewPostcard({ user }) {
           : null
         } */}
 
-      <div className="w-96 h-full shadow-md bg-white px-1 absolute" id="sidenavExample">
+      <div className="w-96 h-full shadow-md bg-white px-1" id="sidenavExample">
         <ul className="relative">
           {/* SHAPES */}
           <li className="relative" id="sidenavEx1">
@@ -390,12 +390,12 @@ function NewPostcard({ user }) {
         </ul>
       </div>
 
-      <div className="grid place-items-center mt-20 mb-20">
+      <div className="place-items-center mt-20 mb-20">
           <h2 className='mb-8 text-4xl font-semibold tracking-wide'>DESIGN YOUR POSTCARD</h2>
           <canvas id="canvas" />
       </div>
 
-    </>
+    </div>
   )
 }
 
