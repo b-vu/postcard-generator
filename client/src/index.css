@@ -7,8 +7,15 @@
 } */
 
 #canvas {
-  background-image: url("./assets/postcard-message.webp"), url("./assets/postcard-generator.PNG");
+  background-image: url("./assets/postcard-message.webp");
   background-position: left bottom, left top;
   background-size: 100% 50%;
   background-repeat: no-repeat;
 }
+
+/* #canvas {
+  background-image: url("./assets/postcard-message.webp"), url("./assets/postcard-generator.PNG");
+  background-position: left bottom, left top;
+  background-size: 100% 50%;
+  background-repeat: no-repeat;
+} */

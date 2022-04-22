@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useNavigate } from "react-router-dom";
 import { fabric } from 'fabric'
 import message from "../../assets/postcard-message.webp"
 
@@ -10,6 +11,7 @@ function NewPostcard({ user }) {
   const [institutions, setInstitutions] = useState([]);
   const [selectedInstitution, setSelectedInstitution] = useState("");
   const [selectedRecipient, setSelectedRecipient] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     setCanvas(initCanvas());
@@ -103,7 +105,16 @@ function NewPostcard({ user }) {
     canvas.clear()
   }
 
-  function createDummyCanvas() {
+  function downloadPostcard(fileToDownload) {
+    const link = document.createElement('a');
+    link.download = "my-postcard.png";
+    link.href = fileToDownload;
+    link.click();
+  }
+
+  function createDummyCanvas(method) {
+    let downloadFile;
+
     //creating a dummy canvas and copying the original canvas content onto it
     const sourceCanvas = document.querySelector("#canvas");
     const destinationCanvas = document.createElement("canvas");
@@ -118,6 +129,8 @@ function NewPostcard({ user }) {
     //appending the postcard message to bottom of canvas
     const img = new Image();
     img.src = message
+
+    //wait for img to load before drawing onto destination canvas
     img.onload = () => {
       destCtx.drawImage(img, 0, 0, img.width, img.height, 0, 800, 1200, 800);
       //draw the original canvas onto the destination canvas
@@ -125,8 +138,15 @@ function NewPostcard({ user }) {
       //converts the canvas to base-64 data that represents a file type(defaults to PNG)
       const postcardImg = destinationCanvas.toDataURL();
 
-      //send the file in our post request function
-      sendPostRequest(postcardImg, "submit")
+      if(method === "submit") {
+        //send the file in our post request function
+        sendPostRequest(postcardImg, "submit")
+      }
+      else{
+        //download the postcard
+        downloadFile = postcardImg;
+        downloadPostcard(downloadFile);
+      }
     }
   }
 
@@ -159,30 +179,25 @@ function NewPostcard({ user }) {
     formData.append("method", method);
     formData.append("user_id", user.id);
     formData.append("recipient_id", selectedRecipient)
-    
+
     fetch("/postcards", {
       method: "POST",
       body: formData
     })
     .then(res => res.json())
-    .then(data => console.log(data));
+    .then(data => navigate("/"));
   }
 
   function handleDownloadClick(){
-    const postcardImg = createDummyCanvas();
-    const link = document.createElement('a');
-    link.download = "my-postcard.png";
-    link.href = postcardImg;
-    link.click();
+    createDummyCanvas("download");
   }
-
 
   function handleSelectedFileChange(e) {
     setSelectedFile(e.target.files[0])
   }
 
   function submitImage() {
-    createDummyCanvas();
+    createDummyCanvas("submit");
   }
 
   function handleInstitutionChange(e) {

@@ -13,6 +13,7 @@ function Postcard() {
 
     return(
         <div className="p-10 grid justify-center overflow-hidden">
+            <h1 className="font-serif mb-6 text-xl md:text-4xl uppercase font-bold flex justify-center">Wishing you were here</h1>
             {
                 postcard ?
                 <div className="overflow-hidden">

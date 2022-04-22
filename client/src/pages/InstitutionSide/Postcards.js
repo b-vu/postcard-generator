@@ -12,7 +12,7 @@ function Postcards() {
 
   return (
     <div>
-      <h1 className="font-serif mb-6 text-xl md:text-4xl uppercase font-bold flex justify-center">Postcards</h1>
+      <h1 className="font-serif mb-6 text-xl md:text-4xl uppercase font-bold flex justify-center">From our community to yours</h1>
       {
         recipients.map(recipient => {
           return <div key={recipient.id}>
