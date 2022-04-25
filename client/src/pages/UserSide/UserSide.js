@@ -8,7 +8,6 @@ import NewPostcard from "./NewPostcard";
 import { useEffect, useState } from 'react';
 
 function UserSide() {
-
     const [user, setUser] = useState(null);
 
     useEffect(() => {
@@ -24,7 +23,7 @@ function UserSide() {
     return (
         <Routes>
             <Route path="/" element={<Layout user={user} setUser={setUser} />}>
-                <Route index element={<Home user={user}/>} />
+                <Route index element={<Home />} />
                 <Route path="select" element={<Select />} />
                 <Route path="login" element={<Login setUser={setUser}/>} />
                 <Route path="new_postcard" element={<NewPostcard user={user} />} />

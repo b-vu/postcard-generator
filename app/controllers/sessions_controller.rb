@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
     def inst_create
         institution = Institution.find_by(username: params[:username])
         if institution&.authenticate(params[:password])
-            session[:institution_id]= institution.id 
+            session[:institution_id]= institution.id
             render json: institution, status: :created
         else
             render json: {error: "Invalid username or password"}, status: :unauthorized

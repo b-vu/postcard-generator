@@ -1,8 +1,6 @@
 import React from 'react'
 
-function Home({ user }) {
-  console.log(user)
-
+function Home() {
   return (
     <div className="grid grid-cols-1 items-center justify-center mx-auto">
       <header className="bg-header container flex items-center justify-center h-screen mx-auto">

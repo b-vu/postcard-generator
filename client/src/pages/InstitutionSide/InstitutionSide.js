@@ -7,7 +7,6 @@ import Postcards from './Postcards'
 import Postcard from './Postcard';
 import { useEffect, useState } from 'react';
 
-
 function InstitutionSide() {
   const [user, setUser] = useState(null);
 
@@ -16,14 +15,14 @@ function InstitutionSide() {
     .then(res => {
       if(res.ok) {
         res.json()
-        .then(user => setUser(user))
+        .then(user => setUser(user));
       }
     })
   }, []);
 
   return (
     <Routes>
-      <Route path="/org" element={<Layout user={user} setUser={setUser} />}>
+      <Route path="/org" element={<Layout org={user} setUser={setUser} />}>
         <Route path="login" element={<InstLogin setUser={setUser}/>} />
         <Route path="recipients">
           <Route index element={<Recipients user={user} />} />

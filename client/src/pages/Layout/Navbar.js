@@ -2,19 +2,20 @@ import React from 'react'
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom"
 
-function Navbar( {user, setUser} ) {
+function Navbar( {user, setUser, org } ) {
+    let navigate = useNavigate();
 
-    let navigate = useNavigate()
+    console.log(user, org);
 
     function handleLogout () {
-        if (user.manager_name) {
-            fetch("/inst-logout", {
-            method: "DELETE",
+        if (user) {
+            fetch("/logout", {
+                method: "DELETE",
             }).then(() => onLogout());
         } 
         else {
-            fetch("/logout", {
-            method: "DELETE",
+            fetch("/inst-logout", {
+                method: "DELETE",
             }).then(() => onLogout());
         }
     }
@@ -29,18 +30,15 @@ function Navbar( {user, setUser} ) {
     }
 
     let homeLink;
-    if (user) {
-        if (user.manager_name) {
-            homeLink = <Link to="/org/recipients/postcards">Postcards</Link>
-        } else {
-            homeLink = <Link to="/">Home</Link>
-        } 
-    } else {
+    if (org) {
+        homeLink = <Link to="/org/recipients/postcards">Postcards</Link>
+    }
+    else {
         homeLink = <Link to="/">Home</Link>
     }
 
     let button;
-    if (user){
+    if (user || org){
         button = <button onClick={handleLogout}>Logout</button>
     } else {
         button = <button onClick={handleLogin}>Login</button>
@@ -48,14 +46,11 @@ function Navbar( {user, setUser} ) {
 
     // Conditional rendering of the new postcard/recipient     
     let newCreation;
-    if (user){
-        if(user.manager_name){
-            newCreation = <Link to="/org/recipients">Recipients</Link>
-        } else {
-            newCreation = <Link to="/new_postcard">New Postcard</Link>
-        }
-    } else {
-        newCreation = <Link to="/login">New Postcard</Link>
+    if (org){
+        newCreation = <Link to="/org/recipients">Recipients</Link>
+    }
+    else {
+        newCreation = <Link to="/new_postcard">New Postcard</Link>
     }
 
     return (

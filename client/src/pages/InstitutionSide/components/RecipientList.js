@@ -72,7 +72,7 @@ function RecipientList( { recipients, handleRecipientsEdit }) {
 
     let recipientElements = recipients.map(recipient => {
         return (
-            <Fragment>
+            <Fragment key={recipient.id}>
                 {editRecipientId === recipient.id ? (
                     <EditableRow key={recipient.id} editFormData={editFormData} handleEditFormChange={handleEditFormChange} /> 
                 ) : (
