@@ -4,11 +4,11 @@ function Home({ user }) {
   console.log(user)
 
   return (
-    <>
+    <div className="grid grid-cols-1 items-center justify-center mx-auto">
       <header className="bg-header container flex items-center justify-center h-screen mx-auto">
         <div className="font-serif mx-4 p-4 text-center md:p-8">
           <h1 className="text-8xl uppercase font-bold">
-            POSTCARD GENERATOR
+            POSTCARD CREATOR
           </h1>
         </div>
       </header>
@@ -42,7 +42,7 @@ function Home({ user }) {
         <p className="mb-4 text-xl">In addition to adding recipients, you will also be able to view, save, and print postcards sent to your patients in a few clicks.</p>
         <p className="mb-4 text-xl">Have questions? Email us at admin@pg.com</p>
       </div>
-    </>
+    </div>
   )
 }
 

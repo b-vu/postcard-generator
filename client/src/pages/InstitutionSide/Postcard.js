@@ -12,7 +12,7 @@ function Postcard() {
     }, [id]);
 
     return(
-        <div className="p-10 grid justify-center overflow-hidden">
+        <div className="p-10 grid justify-center h-min-screen">
             <h1 className="font-serif mb-6 text-xl md:text-4xl uppercase font-bold flex justify-center">Wishing you were here</h1>
             {
                 postcard ?

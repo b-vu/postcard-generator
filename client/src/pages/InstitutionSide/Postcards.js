@@ -11,7 +11,7 @@ function Postcards() {
   }, []);
 
   return (
-    <div>
+    <div className="p-10 h-min-screen">
       <h1 className="font-serif mb-6 text-xl md:text-4xl uppercase font-bold flex justify-center">From our community to yours</h1>
       {
         recipients.map(recipient => {
