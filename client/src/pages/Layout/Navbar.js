@@ -49,8 +49,11 @@ function Navbar( {user, setUser, org } ) {
     if (org){
         newCreation = <Link to="/org/recipients">Recipients</Link>
     }
-    else {
+    else if(user) {
         newCreation = <Link to="/new_postcard">New Postcard</Link>
+    }
+    else {
+        newCreation = <Link to="/login">New Postcard</Link>
     }
 
     return (
